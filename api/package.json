@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server -e js,graphql -w . -w .env server.js",
-    "lint":"eslint .",
+    "lint": "eslint .",
     "compile": "babel src --out-dir public",
     "watch": "babel src --out-dir public --watch --verbose",
     "test": "echo \"Error: no test specified\" && exit 1"
