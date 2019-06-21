@@ -1,4 +1,5 @@
 require('dotenv').config();
+const path = require('path');
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 
@@ -6,7 +7,7 @@ const app = express();
 
 const enableHMR = (process.env.ENBLE_HMR || 'true') === 'true';
 
-if(enableHMR && (process.env.NODE_ENV !== 'production')){
+if (enableHMR && (process.env.NODE_ENV !== 'production')) {
     console.log('Adding dev middleware, enabling  HMR');
     /* eslint "global-require": "off" */
     /* eslint "import/no-extraneous-dependencies"" "off" */
@@ -36,6 +37,10 @@ const env = { UI_API_ENDPOINT };
 
 app.get('/env.js', (req, res) => {
     res.send(`window.ENV = ${JSON.stringify(env)}`);
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve('public/index.html'));
 });
 
 const port = process.env.UI_SERVER_PORT || 8000;
