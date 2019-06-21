@@ -6,11 +6,9 @@ export default class IssueDetail extends React.Component {
         super();
         this.state = { issue: {} };
     }
-
     componentDidMount() {
         this.loadData();
     }
-
     componentDidUpdate(prevProps) {
         const { match: { params: { id: prevId } } } = prevProps;
         const { match: { params: { id } } } = this.props;
@@ -18,15 +16,13 @@ export default class IssueDetail extends React.Component {
             this.loadData();
         }
     }
-
     async loadData() {
         const { match: { params: { id } } } = this.props;
-        const query = `query issue($id:Int!){
-            issue(id:$id){
+        const query = `query issue($id: Int!) {
+            issue (id: $id) {
                 id description
             }
         }`;
-
         const data = await graphQLFetch(query, { id });
         if (data) {
             this.setState({ issue: data.issue });
@@ -34,7 +30,6 @@ export default class IssueDetail extends React.Component {
             this.setState({ issue: {} });
         }
     }
-
     render() {
         const { issue: { description } } = this.state;
         return (

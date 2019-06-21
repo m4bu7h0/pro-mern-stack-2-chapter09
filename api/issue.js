@@ -3,7 +3,7 @@ const { getDb, getNextSequence } = require('./db.js');
 
 async function get(_, { id }) {
     const db = getDb();
-    const issue = await db.collection('issue').findOne({ id });
+    const issue = await db.collection('issues').findOne({ id });
     return issue;
 }
 
